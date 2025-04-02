@@ -18,10 +18,14 @@ const to = new PublicKey("<receiver address>");
 (async () => {
     try {
         // Get the token account of the fromWallet address, and if it does not exist, create it
+        const ataFrom = await getOrCreateAssociatedTokenAccount(connection, keypair, mint, keypair.publicKey)
 
         // Get the token account of the toWallet address, and if it does not exist, create it
+        const ataTo = await getOrCreateAssociatedTokenAccount(connection, keypair, mint, to)
 
         // Transfer the new token to the "toTokenAccount" we just created
+        const tx = transfer(connection, keypair, ataFrom.address, ataTo.address, keypair, 1e6)
+        console.log("Transfer tx: https://explorer.solana.com/tx/" + tx + "?cluster=devnet")
     } catch(e) {
         console.error(`Oops, something went wrong: ${e}`)
     }
