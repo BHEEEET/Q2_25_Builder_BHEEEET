@@ -21,28 +21,37 @@ umi.use(signerIdentity(createSignerFromKeypair(umi, keypair)));
 (async () => {
     try {
         // Start here
-        // let accounts: CreateMetadataAccountV3InstructionAccounts = {
-        //     ???
-        // }
+        let accounts: CreateMetadataAccountV3InstructionAccounts = {
+            mint,
+            mintAuthority: signer,
+        }
 
-        // let data: DataV2Args = {
-        //     ???
-        // }
+        let data: DataV2Args = {
+            name: "test",
+            symbol: "test",
+            uri: "test",
+            sellerFeeBasisPoints: 500,
+            creators: null,
+            collection: null,
+            uses: null
+        }
 
-        // let args: CreateMetadataAccountV3InstructionArgs = {
-        //     ???
-        // }
+        let args: CreateMetadataAccountV3InstructionArgs = {
+            data,
+            isMutable: true,
+            collectionDetails: null
+        }
 
-        // let tx = createMetadataAccountV3(
-        //     umi,
-        //     {
-        //         ...accounts,
-        //         ...args
-        //     }
-        // )
+        let tx = createMetadataAccountV3(
+            umi,
+            {
+                ...accounts,
+                ...args // "3 dots" merges the 2 arrays into 1
+            }
+        )
 
-        // let result = await tx.sendAndConfirm(umi);
-        // console.log(bs58.encode(result.signature));
+        let result = await tx.sendAndConfirm(umi);
+        console.log(bs58.encode(result.signature));
     } catch(e) {
         console.error(`Oops, something went wrong: ${e}`)
     }
