@@ -1,4 +1,4 @@
-import wallet from "../wba-wallet.json"
+import wallet from "./wallet/turbine-wallet.json"
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults"
 import { createGenericFile, createSignerFromKeypair, signerIdentity } from "@metaplex-foundation/umi"
 import { irysUploader } from "@metaplex-foundation/umi-uploader-irys"
@@ -16,28 +16,29 @@ umi.use(signerIdentity(signer));
     try {
         // Follow this JSON structure
         // https://docs.metaplex.com/programs/token-metadata/changelog/v1.0#json-structure
+        // https://turbine-solanad-4cde.devnet.rpcpool.com/168dd64f-ce5e-4e19-a836-f6482ad6b396
 
-        // const image = ???
-        // const metadata = {
-        //     name: "?",
-        //     symbol: "?",
-        //     description: "?",
-        //     image: "?",
-        //     attributes: [
-        //         {trait_type: '?', value: '?'}
-        //     ],
-        //     properties: {
-        //         files: [
-        //             {
-        //                 type: "image/png",
-        //                 uri: "?"
-        //             },
-        //         ]
-        //     },
-        //     creators: []
-        // };
-        // const myUri = ???
-        // console.log("Your metadata URI: ", myUri);
+        const image = "https://devnet.irys.xyz/A1EumRhhFXqN6sJvaAoNNtwS9fnXqqfHyUZmh432iZCJ"
+        const metadata = {
+            name: "SOL BeNeLux",
+            symbol: "SOLBENELUX",
+            description: "Tets Benenlux",
+            image: image,
+            attributes: [
+                {trait_type: 'Test', value: 'Good'}
+            ],
+            properties: {
+                files: [
+                    {
+                        type: "image/png",
+                        uri: image
+                    },
+                ]
+            },
+            creators: []
+        };
+        const myUri = await umi.uploader.uploadJson(metadata);
+        console.log("Your metadata URI: ", myUri);
     }
     catch(error) {
         console.log("Oops.. Something went wrong", error);
