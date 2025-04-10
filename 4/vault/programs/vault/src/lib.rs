@@ -108,7 +108,7 @@ pub struct Close<'info> {
     // holding lamports
     pub vault: SystemAccount<'info>,
 
-    // init  makes it also mutable
+    // mut because we are sending sol
     #[account(
         mut,
         seeds = [b"state", signer.key().as_ref()],
