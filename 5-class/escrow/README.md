@@ -18,3 +18,12 @@ Make
 - init escrow
 - deposit funds
 
+Refund
+- deposit funds to maker
+- close vault
+
+Take
+- deposit funds
+- send token_b to maker
+- send token_a to taker
+- close account
