@@ -1,0 +1,14 @@
+use anchor_lang::prelude::*;
+
+#[account]
+#[derive(InitSpace)]
+pub struct Marketplace {
+    pub admin: Pubkey,
+    pub fee: u16, //basispoints
+    pub bump: u8,
+    pub treasury_bump: u8,
+    pub rewards_bump: u8,
+    // A string is a unkown size, so restrict it
+    #[max_len(32)]
+    pub name: String,
+}
