@@ -1,0 +1,3 @@
+[submodule "capstone/privment"]
+	path = capstone/privment
+	url = git@github.com:BHEEEET/privment.git
